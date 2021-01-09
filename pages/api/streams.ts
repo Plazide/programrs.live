@@ -27,21 +27,25 @@ let cache = {}
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const query: IQuery = req.query;
 	const url = req.url;
+	let streams = [];
 	console.log(url);
 
 	const cached = cache[url];
-	const result = await twitch.getStreams({ 
-		game_id: [509670, 21548, 505867], 
-		language: "en", 
-		first: query.limit || 100
-	})
-	const streams = cached && cached.length > 0
-		? cached
-		: result.data.filter( stream => stream.tag_ids?.filter( value => tags.includes(value)))
+
+	if(!cached){
+		const result =  await twitch.getStreams({ 
+			game_id: [509670, 21548, 505867], 
+			language: "en", 
+			first: 100
+		});
+		streams = result.data.filter( stream => stream.tag_ids?.some( tagId => tags.includes(tagId) ));
+	}else{
+		streams = cached;
+	}
 	
 	cache[url] = streams;
 	res.statusCode = 200
-	res.json({ 
+	res.json({
 		streams: sortArray(
 			streams, 
 			query.sort || "viewer_count", 
