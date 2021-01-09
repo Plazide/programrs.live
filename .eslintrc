@@ -3,9 +3,11 @@
 		"eslint:recommended",
 		"plugin:react/recommended"
 	],
+	"plugins": ["jest"],
 	"env": {
 		"node": true,
-		"browser": true
+		"browser": true,
+		"jest/globals": true
 	},
 	"rules": {
 		"react/react-in-jsx-scope": "off",
