@@ -1,0 +1,7 @@
+.header{
+	height: 80px;
+	width: 100%;
+
+	background: var(--secondary);
+	box-shadow: 0 4px 10px var(--coloredShadow);
+}

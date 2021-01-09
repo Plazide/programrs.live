@@ -1,0 +1,17 @@
+{
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended"
+	],
+	"env": {
+		"node": true,
+		"browser": true
+	},
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"indent": ["error", "tab"],
+		"no-unused-vars": "warn",
+		"quotes": "error"
+	},
+	"parser": "babel-eslint"
+}

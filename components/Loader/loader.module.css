@@ -1,0 +1,32 @@
+.container{
+	display: block;
+	margin: auto;
+	
+/* 	border-image: 2px solid var(--gradient); */
+	border-image: var(--gradient) 1;
+	border-radius: 50%;
+	border-width: 2px;
+	border-style: solid;
+	border-image-repeat: round;
+
+	animation: spin 1s infinite ease;
+}
+.container.small{
+	width: 1.4rem;
+	height: 1.4rem;
+}
+.container.medium{
+	width: 2.6rem;
+	height: 2.6rem;
+}
+.container.large{
+	border-width: 6px;
+	width: 4rem;
+	height: 4rem;
+}
+
+@keyframes spin{
+	to{
+		transform: rotate(360deg);
+	}
+}

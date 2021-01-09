@@ -1,0 +1,63 @@
+.stream{
+	max-width: 336px;
+	margin-bottom: 2rem;
+
+	background: var(--gradient);
+}
+.stream .image{
+	height: 189px;
+	width: 336px;
+}
+.stream .content{
+	padding: .5rem;
+	display: grid;
+	grid-template-areas: 
+		"title title"
+		"user ______"
+	;
+	gap: 1rem;
+}
+.stream .title{
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	grid-area: title;
+
+	height: 20px;
+	width: 80%;
+}
+.stream .content .user{
+	grid-area: user;
+
+	display: flex;
+	align-items: center;
+
+	height: 15px;
+	width: 50%;
+}
+
+.placeholder{
+	background: #b9b8d2;
+	position: relative;
+	border-radius: 3px;
+
+	overflow: hidden;
+}
+.placeholder::after{
+	content: "";
+	position: absolute;
+
+	height: 100%;
+	width: 100px;
+	left: -100px;
+	top: 0;
+	
+	background: linear-gradient(to right, transparent, var(--alt), transparent);
+	animation: reflect 1s ease-out infinite;
+}
+
+@keyframes reflect{
+	to{
+		left: calc(100% + 100px);
+	}
+}
