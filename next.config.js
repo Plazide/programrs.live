@@ -6,5 +6,8 @@ module.exports = {
 		})
 
 		return config;
+	},
+	images: {
+		domains: ["static-cdn.jtvnw.net"]
 	}
 }
