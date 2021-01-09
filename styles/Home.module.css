@@ -53,7 +53,6 @@
 }
 .stream .title{
 	font-weight: bold;
-	overflow: hidden;
 	text-overflow: ellipsis;
 	grid-area: title;
 }
