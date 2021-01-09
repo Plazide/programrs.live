@@ -22,7 +22,7 @@ async function fetcher(path: string){
 }
 
 export default function Home() {
-	const { data, error, isValidating } = useSWR("/api/streams?sort=viewer_count&order=desc", fetcher);
+	const { data, error } = useSWR("/api/streams?sort=viewer_count&order=desc", fetcher);
 	
 	if(error) console.error(error);
 	const streams = data?.streams || [];
@@ -41,7 +41,7 @@ export default function Home() {
 			<div className={styles.streams}>
 				<ul className={styles.list}>
 					{
-						isValidating
+						!data
 							? new Array(4).fill("").map( (_, index) => <StreamSkeleton key={index} />)
 							: streams.map( stream => <Stream stream={stream} key={stream.id} />)
 					}
