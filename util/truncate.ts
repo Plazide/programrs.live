@@ -5,5 +5,5 @@
  * @param trail - The trial showing that the string is truncated. Default: "..."
  */
 export function truncate(str: string, length: number, trail = "..."){
-	return str.length > length ? str.slice(0, length - trail.length) + trail: str;
+	return str.length > length ? str.slice(0, length - trail.length).trimEnd() + trail: str;
 }
