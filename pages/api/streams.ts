@@ -3,6 +3,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import TwitchApi from "node-twitch";
 import sortArray from "array-sort";
 
+interface IQuery{
+	limit?: number;
+	sort?: "viewer_count",
+	order?: "desc" | "asc" 
+}
+
 const twitch = new TwitchApi({
 	client_id: process.env.CLIENT_ID,
 	client_secret: process.env.CLIENT_SECRET
@@ -19,7 +25,7 @@ const tags = [
 let cache = {}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const query = req.query;
+	const query: IQuery = req.query;
 	const url = req.url;
 	console.log(url);
 
@@ -27,7 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const result = await twitch.getStreams({ 
 		game_id: [509670, 21548, 505867], 
 		language: "en", 
-		first: 100
+		first: query.limit || 100
 	})
 	const streams = cached && cached.length > 0
 		? cached
@@ -41,22 +47,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			query.sort || "viewer_count", 
 			{ reverse: query.order === "desc" }) 
 	});
-}
-
-async function GetAllStreamTags(){
-	let tags = [];
-
-	async function fetchStreamTags(cursor?: string){
-		const result = await twitch.getAllStreamTags({ first: 100, after: cursor });
-		const after = result.pagination.cursor;
-
-		tags = [...tags, ...result.data]
-
-		if(after)
-			return fetchStreamTags(after);
-	}
-
-	await fetchStreamTags();
-
-	return tags;
 }
