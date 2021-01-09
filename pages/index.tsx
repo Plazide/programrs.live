@@ -75,7 +75,7 @@ function Stream({ stream }: StreamProps){
 					target="__blank"
 					rel="noopener noreferrer"
 				>
-					{truncate(stream.title, 50)}
+					{truncate(stream.title, 70)}
 				</a>
 
 				<a href={streamUrl} className={styles.user}>
