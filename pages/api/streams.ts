@@ -27,6 +27,7 @@ let cache = {}
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const query: IQuery = req.query;
 	const url = req.url;
+	const limit = query.limit || 20;
 	let streams = [];
 	console.log(url);
 
@@ -43,12 +44,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		streams = cached;
 	}
 	
+	if(streams.length > limit) streams.length = limit;
 	cache[url] = streams;
+
 	res.statusCode = 200
 	res.json({
 		streams: sortArray(
 			streams, 
 			query.sort || "viewer_count", 
-			{ reverse: query.order === "desc" }) 
+			{ reverse: query.order === "desc" }
+		)
 	});
 }
