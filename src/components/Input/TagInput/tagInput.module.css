@@ -1,0 +1,84 @@
+.tagInput{
+	position: relative;
+	max-width: 400px;
+	width: 100%;
+}
+.inputWrapper{
+	width: 100%;
+	padding: .4rem;
+	/* box-shadow: 0 0px 0px 0 var(--bgOpacity); */
+	border: 1px solid var(--purple);
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+
+	transition: box-shadow 100ms ease;
+}
+.inputWrapper:focus-within{
+	box-shadow: 1px 2px 2px 1px var(--bgOpacity);
+}
+.inputWrapper .input{
+	border: none;
+	font-size: .9rem;
+	outline: none;
+	overflow: visible;
+	flex-basis: 100px;
+	flex-shrink: 1;
+}
+.selectedTags{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+}
+.tag{
+	background: var(--primary);
+	border-radius: 10px;
+	font-size: .9rem;
+	border: none;
+	padding: .3rem .5rem;
+	text-align: left;
+	/* font-weight: bold; */
+	cursor: pointer;
+	color: var(--secondary);
+
+	margin-right: 5px;
+}
+.tag .value{
+	font-weight: inherit;
+	margin-right: 5px;
+}
+.tag:focus,
+.tag:active{
+	background: var(--red);
+}
+.suggestions{
+	position: absolute;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	top: 100%;
+
+	background: #fff;
+	box-shadow: 0 2px 2px 0px var(--bgOpacity);
+	width: 100%;
+	z-index: 1001;
+
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.suggestions .suggestion{
+	margin: .3rem;
+	background: var(--alt);
+}
+.suggestions .suggestion .value{
+	margin-right: 0;
+}
+.suggestion:hover,
+.suggestion:active,
+.suggestion:focus{
+	background: var(--primary);
+}

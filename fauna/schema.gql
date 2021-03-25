@@ -1,0 +1,38 @@
+type Stream{
+	service: EnumService!
+
+	title: String!
+	channel: String!
+	thumbnail: String!
+	viewers: Int!
+	startedAt: Time!
+	link: String!
+	language: String!
+	avatar: String
+	tech: [String]
+}
+
+input Filter{
+	language: String
+	service: EnumService
+	tech: [String]
+}
+
+enum EnumService{
+	twitch
+	youtube
+}
+
+enum EnumSorting{
+	viewers
+	startedAt
+}
+
+enum EnumOrder{
+	asc
+	desc
+}
+
+type Query{
+	allStreams(sorting: EnumSorting, order: EnumOrder, filter: Filter): [Stream!]! @resolver(name: "all-streams", paginated: true)
+}

@@ -1,0 +1,16 @@
+{
+	"envPath": ".env.local",
+	"codegen": {
+		"plugins": [
+			"typescript-urql"
+		],
+		"pluginOptions": {
+			"dedupeOperationSuffix": true
+		},
+		"outputFile": "src/graphql/types.ts",
+		"headers": {
+			"X-Schema-Preview": "partial-update-mutation"
+		},
+		"documents": ["src/graphql/queries.graphql"]
+	}
+}

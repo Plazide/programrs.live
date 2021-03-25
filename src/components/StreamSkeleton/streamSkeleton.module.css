@@ -1,12 +1,12 @@
 .stream{
-	max-width: 336px;
+	max-width: 274px;
 	margin-bottom: 2rem;
 
 	background: var(--gradient);
 }
 .stream .image{
 	height: 189px;
-	width: 336px;
+	width: 274px;
 }
 .stream .content{
 	padding: .5rem;

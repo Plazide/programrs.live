@@ -1,0 +1,137 @@
+.stream{
+	width: 274px;
+	max-width: 100%;
+	/* height: 223px; */
+	/* position: relative; */
+	background: #F4F4F4;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.25);
+
+	margin-bottom: 1.5rem;
+}
+.stream .imageWrapper{
+	position: relative;
+}
+.stream .viewers{
+	box-sizing: border-box;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background: var(--primary);
+	height: 25px;
+	min-width: 50px;
+	font-size: .9rem;
+	font-family: consolas;
+	font-weight: bold;
+	border-radius: 4px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 5px;
+}
+.stream .viewers .icon{
+	height: .7rem;
+	margin-right: 10px;
+}
+.stream .viewers .icon path{
+	fill: var(--secondary);
+}
+.stream .service{
+	box-sizing: border-box;
+	background: var(--primary);
+	height: 25px;
+	border-radius: 4px;
+	padding: 2px 5px;
+	position: absolute;
+
+	top: 10px;
+	right: 10px;
+}
+.stream .startedAt{
+	box-sizing: border-box;
+	background: var(--primary);
+	height: 25px;
+	border-radius: 4px;
+	padding: 2px 5px;
+	position: absolute;
+
+	bottom: 10px;
+	left: 10px;
+}
+
+.stream .content{
+	padding: 6px;
+	display: flex;
+	flex-direction: column;
+}
+.stream .content .topRow{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.stream .avatar{
+	width: 45px;
+	height: 45px;
+	min-width: 45px;
+	border-radius: 50%;
+
+	background: linear-gradient(var(--secondary), var(--primary));
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.avatar .image,
+.avatar .initial{
+	border-radius: 50%;
+	height: 35px;
+	width: 35px;
+}
+
+.avatar .initial{
+	background: var(--grey);
+	
+	text-align: center;
+	font-size: 1.4rem;
+	font-weight: bold;
+	color: var(--purple)
+}
+.stream:nth-child(1n) .avatar .initial{
+	background: var(--red);
+}
+.stream:nth-child(2n) .avatar .initial{
+	background: var(--purple);
+	color: var(--alt);
+}
+.stream:nth-child(3n) .avatar .initial{
+	background: green;
+	color: var(--alt);
+}
+.stream:nth-child(4n) .avatar .initial{
+	background: yellow;
+	color: var(--secondary);
+}
+.stream:nth-child(5n) .avatar .initial{
+	background: blue;
+	color: var(--alt);
+}
+.stream:nth-child(4n+2) .avatar .initial{
+	background: var(--grey);
+	color: var(--alt);
+}
+
+.stream .title{
+	font-size: .9rem;
+	font-weight: bold;
+	margin-left: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: pre-line;
+	height: 40px;
+	word-wrap: break-word;
+}
+.stream .user{
+	margin-left: 55px;
+	font-size: .9rem;
+}

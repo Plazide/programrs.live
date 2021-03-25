@@ -1,0 +1,17 @@
+query allStreams($sorting: EnumSorting, $order: EnumOrder, $filter: Filter $size: Int, $cursor: String) {
+	allStreams(sorting: $sorting, order: $order, filter: $filter, _size: $size, _cursor: $cursor){
+		after
+		before
+		data{
+			service
+			title
+			thumbnail
+			viewers
+			startedAt
+			link
+			channel
+			avatar
+			language
+		}
+	}
+}

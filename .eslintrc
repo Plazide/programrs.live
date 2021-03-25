@@ -3,7 +3,7 @@
 		"eslint:recommended",
 		"plugin:react/recommended"
 	],
-	"plugins": ["jest"],
+	"plugins": ["jest", "@typescript-eslint"],
 	"env": {
 		"node": true,
 		"browser": true,
@@ -12,8 +12,10 @@
 	"rules": {
 		"react/react-in-jsx-scope": "off",
 		"indent": ["error", "tab"],
-		"no-unused-vars": "warn",
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["warn"],
 		"quotes": "error"
 	},
-	"parser": "babel-eslint"
+	"parser": "@typescript-eslint/parser",
+	"ignorePatterns": "src/graphql/types.ts"
 }
