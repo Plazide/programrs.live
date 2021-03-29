@@ -110,7 +110,7 @@ async function saveToFauna(streams: NormalizedStream[]){
 			q.Let(
 				{
 					documents: q.Match(
-						q.Index("allStreams")
+						q.Index("list-streams")
 					)
 				},
 				q.Foreach(
