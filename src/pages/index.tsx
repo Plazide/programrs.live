@@ -4,13 +4,11 @@ import styles from "../styles/Home.module.css"
 
 import StreamSkeleton from "../components/StreamSkeleton/StreamSkeleton";
 import Stream from "../components/Stream/Stream";
-import { useEffect, useRef, useState } from "react";
-import useInfiniteScroll from "../hooks/useInfiniteScroll";
-import { useAllStreamsQuery, EnumOrder, EnumSorting } from "../graphql/types";
+import { useRef } from "react";
 import Filter from "../components/Filter/Filter";
-import { State } from "../hooks/useFilter";
 import { GetStaticProps } from "next";
 import { Client, query as q, ClientConfig } from "faunadb";
+import { useStreams } from "../hooks/useStreams";
 
 interface Props{
 	langs: string[];
@@ -18,39 +16,12 @@ interface Props{
 
 export default function Home({ langs }: Props) {
 	const streamsRef = useRef<HTMLDivElement>(null);
-	const nextCursor = useRef<string>(null);
-	const [cursor, setCursor] = useState(null);
-	const [state, setState] = useState<State>({ sorting: EnumSorting.Viewers, order: EnumOrder.Desc });
-	const [result] = useAllStreamsQuery({
-		variables: {...state, cursor, size: 20 }
-	})
-	const { data, error, fetching } = result;
-	const streams = data?.allStreams.data || [];
-	nextCursor.current = data?.allStreams?.after || null
-
-	if(error) console.error(error);
-
-	function onFilterChange(filter: State){
-		setState(filter);
-	}
-
-	function onNextPage(){
-		console.log({ nextCursor: nextCursor.current })
-
-		if(nextCursor.current && nextCursor.current !== cursor)
-			setCursor(nextCursor.current);
-	}
-
-	useEffect(() => {
-		nextCursor.current = null;
-		console.log("Next cursor changed to", nextCursor.current)
-
-		setCursor(null);
-	}, [JSON.stringify(state)]);
-
-	useInfiniteScroll(streamsRef, onNextPage, { 
-		enabled: true
-	});
+	const{
+		streams,
+		fetching,
+		cursor,
+		onFilterChange
+	} = useStreams(streamsRef);
 
 	return (
 		<Layout>
@@ -65,7 +36,6 @@ export default function Home({ langs }: Props) {
 			</div>
 
 			<Filter langs={langs} onChange={onFilterChange} />
-			<button onClick={onNextPage}>next page</button>
 			<div className={styles.streams} ref={streamsRef}>
 				<ul className={styles.list}>
 					{
