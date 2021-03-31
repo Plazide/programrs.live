@@ -5,13 +5,12 @@ import styles from "../styles/Home.module.css"
 import StreamSkeleton from "../components/StreamSkeleton/StreamSkeleton";
 import Stream from "../components/Stream/Stream";
 import { useEffect, useRef, useState } from "react";
-import useInfiniteScroll from "../util/useScrollBottom";
-import { useAllStreamsQuery, EnumOrder, EnumSorting, AllStreamsQuery, AllStreamsQueryVariables, AllStreamsDocument } from "../graphql/types";
+import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import { useAllStreamsQuery, EnumOrder, EnumSorting } from "../graphql/types";
 import Filter from "../components/Filter/Filter";
 import { State } from "../hooks/useFilter";
 import { GetStaticProps } from "next";
 import { Client, query as q, ClientConfig } from "faunadb";
-import client from "../util/urql";
 
 interface Props{
 	langs: string[];
@@ -20,19 +19,14 @@ interface Props{
 export default function Home({ langs }: Props) {
 	const streamsRef = useRef<HTMLDivElement>(null);
 	const nextCursor = useRef<string>(null);
-	const [streams, setStreams] = useState([]);
 	const [cursor, setCursor] = useState(null);
 	const [state, setState] = useState<State>({ sorting: EnumSorting.Viewers, order: EnumOrder.Desc });
 	const [result] = useAllStreamsQuery({
 		variables: {...state, cursor, size: 20 }
 	})
-	const { data, error } = result;
-	// const newStreams = data?.allStreams.data || [];
-	// const beforeCursor = data?.allStreams.before;
-	if(data?.allStreams.after)
-		nextCursor.current = data.allStreams.after
-
-	// console.log({ nextCursor })
+	const { data, error, fetching } = result;
+	const streams = data?.allStreams.data || [];
+	nextCursor.current = data?.allStreams?.after || null
 
 	if(error) console.error(error);
 
@@ -40,25 +34,23 @@ export default function Home({ langs }: Props) {
 		setState(filter);
 	}
 
-	useInfiniteScroll(streamsRef, () => {
-		console.log("Load more")
-		if(nextCursor.current !== cursor)
+	function onNextPage(){
+		console.log({ nextCursor: nextCursor.current })
+
+		if(nextCursor.current && nextCursor.current !== cursor)
 			setCursor(nextCursor.current);
+	}
+
+	useEffect(() => {
+		nextCursor.current = null;
+		console.log("Next cursor changed to", nextCursor.current)
+
+		setCursor(null);
+	}, [JSON.stringify(state)]);
+
+	useInfiniteScroll(streamsRef, onNextPage, { 
+		enabled: true
 	});
-
-	useEffect( () => {
-		const { before = null, after = null } = data?.allStreams || {};
-		const newStreams = data?.allStreams.data || []
-
-		if(!before && !after) setStreams(newStreams);
-		if(after) setStreams([...streams, ...newStreams]);
-		
-		
-	}, [nextCursor.current])
-
-	// useEffect(() => {
-	// 	refetch();
-	// }, [cursor])
 
 	return (
 		<Layout>
@@ -73,13 +65,13 @@ export default function Home({ langs }: Props) {
 			</div>
 
 			<Filter langs={langs} onChange={onFilterChange} />
+			<button onClick={onNextPage}>next page</button>
 			<div className={styles.streams} ref={streamsRef}>
 				<ul className={styles.list}>
-					{streams.map( stream => <Stream stream={stream} key={stream.channel} />)}
 					{
-						!data
+						fetching && !cursor
 							? new Array(4).fill("").map( (_, index) => <StreamSkeleton key={index} />)
-							: null
+							: streams.map( stream => <Stream stream={stream} key={stream.channel} />)
 					}
 				</ul>
 			</div>
@@ -108,8 +100,6 @@ export const getStaticProps: GetStaticProps = async () => {
 			q.Distinct(q.Match(q.Index("all-stream-services")))
 		)
 	)
-
-	console.log(services);
 
 	return {
 		props: {

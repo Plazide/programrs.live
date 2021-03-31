@@ -1,14 +1,23 @@
 import { RefObject, useEffect } from "react";
-import { useDebouncedCallback } from "use-debounce"
+import { useDebounceCallback } from "@react-hook/debounce"
 
+interface Options{
+	offsetBottom?: number;
+	enabled?: boolean;
+}
 
-export default function useInfiniteScroll(ref: RefObject<HTMLDivElement>, callback: () => void, offsetBottom = 300){
+export default function useInfiniteScroll(ref: RefObject<HTMLDivElement>, callback: () => void, {
+	offsetBottom = 300,
+	enabled = true
+}: Options = {}){
 	if(typeof window === "undefined") return;
-	const debouncedCallback = useDebouncedCallback(callback, 1000)
+	const debouncedCallback = useDebounceCallback(callback, 1000, true)
 
 	const element = ref.current;
 
 	function handleScroll(){
+		if(!element || !enabled) return;
+
 		const scrollY = window.scrollY;
 		const height = element.clientHeight;
 		const offsetTop = element.offsetTop;

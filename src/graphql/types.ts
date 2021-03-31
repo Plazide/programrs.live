@@ -87,17 +87,6 @@ export type StreamInput = {
   tech?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
-/** The pagination object for elements of type 'Stream'. */
-export type StreamPage = {
-  __typename?: 'StreamPage';
-  /** The elements of type 'Stream' in this page. */
-  data: Array<Maybe<Stream>>;
-  /** A cursor for elements coming after the current page. */
-  after?: Maybe<Scalars['String']>;
-  /** A cursor for elements coming before the current page. */
-  before?: Maybe<Scalars['String']>;
-};
-
 export enum EnumOrder {
   Asc = 'asc',
   Desc = 'desc'
