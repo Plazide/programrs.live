@@ -1,12 +1,20 @@
 # Programrs
 
-Programrs is a website that aims to gather programming streams from around the internet in one place. For the time being, only streams from [Twitch](https://twitch.tv) are being showed.
+Programrs is a website that aims to gather programming streams from around the internet in one place. For the time being, only streams from [Twitch](https://twitch.tv) are being showed. Streams from YouTube are planned.
 
 ## More sources
 
 If you know any other sources of programming streams, feel free to open an issue so that we can start a discussion about adding it.
 
-## Developing
+## Contributing
+
+If you want to start contributing to this project, the easiest way is to add a technology. You can do this by going to [src/models/technologies.ts](src/models/technologies.ts).
+
+Technologies are keywords which are used to identify which technologies are being used within a given stream. This is extracted from the title of the stream.
+
+You can add aliases for a specific technology by making it an array, the first item of the array will be the name used in filtering options.
+
+### Developing
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
