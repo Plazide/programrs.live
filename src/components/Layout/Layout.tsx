@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from "react"
 
-import styles from "../../styles/Layout.module.css";
+import styles from "./layout.module.css";
 
 interface Props {
 	children: ReactNode
@@ -10,7 +10,7 @@ export default function Layout({ children }: Props): ReactElement {
 	return (
 		<>
 			<header className={styles.header}></header>
-			<main>{children}</main>
+			<main className={styles.main}>{children}</main>
 		</>
 	)
 }

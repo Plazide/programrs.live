@@ -1,6 +1,7 @@
 .stream{
 	width: 274px;
 	max-width: 100%;
+	margin: .5rem;
 	/* height: 223px; */
 	/* position: relative; */
 	background: #F4F4F4;
@@ -134,4 +135,71 @@
 .stream .user{
 	margin-left: 55px;
 	font-size: .9rem;
+}
+
+@media only screen and (max-width: 600px){
+	.stream{
+		width: 100%;
+		margin: .5rem 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+	.stream .content{
+		width: 65%;
+		justify-content: space-between;
+	}
+	.stream .content .title{
+		font-size: .8rem;
+		line-height: 105%;
+	}
+	.stream .content .user{
+		font-size: .8rem;
+		margin-left: 50px;
+	}
+	.stream .imageWrapper{
+		width: 30%;
+		min-width: 135px;
+	}
+	.stream .imageWrapper .image{
+		width: 100%;
+	}
+	.stream .startedAt,
+	.stream .viewers,
+	.stream .service{
+		font-size: .8rem;
+		padding: .2rem;
+		line-height: 100%;
+		height: auto;
+	}
+	.stream .startedAt{
+		bottom: 5px;
+		left: 5px;
+	}
+	.stream .viewers{
+		top: 5px;
+		left: 5px;
+	}
+	.stream .service{
+		right: 5px;
+		top: 5px;
+	}
+	.stream .avatar{
+		width: 40px;
+		height: 40px;
+		min-width: 40px;
+		border-radius: 50%;
+	}
+	.avatar .image,
+	.avatar .initial{
+		border-radius: 50%;
+		height: 35px;
+		width: 35px;
+	}
+}
+
+@media only screen and (max-width: 905px){
+	.stream{
+		margin: .5rem .3rem;
+	}
 }

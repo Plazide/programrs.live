@@ -9,6 +9,7 @@ import Filter from "../components/Filter/Filter";
 import { GetStaticProps } from "next";
 import { Client, query as q, ClientConfig } from "faunadb";
 import { useStreams } from "../hooks/useStreams";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 interface Props{
 	langs: string[];
@@ -22,7 +23,9 @@ export default function Home({ langs }: Props) {
 		cursor,
 		onFilterChange
 	} = useStreams(streamsRef);
+	const isMobile = useIsMobile();
 
+	console.log({ isMobile })
 	return (
 		<Layout>
 			<Head>
@@ -35,7 +38,10 @@ export default function Home({ langs }: Props) {
 				<p>Find programming streams from all around the internet, but mostly Twitch.</p>
 			</div>
 
-			<Filter langs={langs} onChange={onFilterChange} />
+			<Filter 
+				langs={langs} 
+				onChange={onFilterChange} 
+			/> 
 			<div className={styles.streams} ref={streamsRef}>
 				<ul className={styles.list}>
 					{

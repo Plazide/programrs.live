@@ -1,8 +1,7 @@
 import React, { ReactElement } from "react"
 import Image from "next/image";
 import { truncate } from "../../util/truncate";
-
-import { Stream as IStream } from "../../graphql/types";
+import { useIsMobile } from "../../hooks/useIsMobile";
 
 // Icons
 import ViewersIcon from "../../icons/viewers.svg";
@@ -12,6 +11,8 @@ import TwitchLogo from "../../icons/twitch.svg";
 import styles from "./stream.module.css";
 import formatDistanceStrict from "date-fns/formatDistanceStrict/index.js";
 
+import { Stream as IStream } from "../../graphql/types";
+
 interface StreamProps{
 	stream: Omit<IStream, "_id" | "_ts">
 }
@@ -19,6 +20,8 @@ interface StreamProps{
 export default function Stream({ stream }: StreamProps): ReactElement{
 	const { thumbnail, channel, viewers, avatar, link, startedAt, title } = stream;
 	const uptime = formatDistanceStrict(new Date(startedAt), new Date());
+	const isMobile = useIsMobile();
+	const titleLength = isMobile ? 55 : 45;
 
 	return(
 		<li className={styles.stream}>
@@ -31,8 +34,10 @@ export default function Stream({ stream }: StreamProps): ReactElement{
 					<Image 
 						src={thumbnail}
 						alt={`${channel}'s thumbnail`}
+						layout="responsive"
 						height={189}
 						width={336}
+						className={styles.image}
 					/>
 				</a>
 				<span className={styles.viewers}>
@@ -70,7 +75,7 @@ export default function Stream({ stream }: StreamProps): ReactElement{
 						rel="noopener noreferrer"
 						title={title}
 					>
-						{truncate(title, 45)}
+						{truncate(title, titleLength)}
 					</a>
 				</div>
 				

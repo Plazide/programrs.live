@@ -1,11 +1,13 @@
 .hero{
 	padding: 4rem 0;
 	max-width: 1200px;
+	width: 100%;
 
 	margin: auto;
 }
 .streams{
 	max-width: 1200px;
+	width: 100%;
 	margin: auto;
 }
 .list{
@@ -15,5 +17,18 @@
 
 	list-style: none;
 	padding: 0;
+	padding-bottom: 4rem;
 	margin: 0;
+}
+
+@media only screen and (max-width: 590px){
+	.hero{
+		padding: 1rem 0;
+	}
+}
+
+@media only screen and (max-width: 905px){
+	.list{
+		justify-content: center;
+	}
 }
