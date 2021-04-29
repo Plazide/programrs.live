@@ -2,8 +2,13 @@
 	padding: 4rem 0;
 	max-width: 1200px;
 	width: 100%;
+	overflow: visible;
 
 	margin: 0 auto 2rem auto;
+	background-image: url("../images/langs.png");
+	background-size: contain;
+	background-repeat: repeat-x;
+	background-position: left center;
 }
 .hero h1{
 	line-height: 100%;

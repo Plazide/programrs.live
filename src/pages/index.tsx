@@ -9,7 +9,8 @@ import Filter from "../components/Filter/Filter";
 import { GetStaticProps } from "next";
 import { Client, query as q, ClientConfig } from "faunadb";
 import { useStreams } from "../hooks/useStreams";
-import { useIsMobile } from "../hooks/useIsMobile";
+
+const API_ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || "https://graphql.fauna.com"
 
 interface Props{
 	langs: string[];
@@ -23,15 +24,17 @@ export default function Home({ langs }: Props) {
 		cursor,
 		onFilterChange
 	} = useStreams(streamsRef);
-	const isMobile = useIsMobile();
 
-	console.log({ isMobile })
 	return (
 		<Layout>
 			<Head>
 				<title>Programrs | Find live programming streams</title>
 				<meta name="description" content="Find programming live streams from around the internet. Everything collected in one place for you to browse." />
 				<link rel="icon" href="/favicon.ico" />
+				<link 
+					rel="preconnect" 
+					href={API_ENDPOINT} 
+				/>
 			</Head>
 			<div className={styles.hero}>
 				<h1>Live programming streams</h1>
@@ -57,8 +60,8 @@ export default function Home({ langs }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
 	const secret = process.env.NEXT_PUBLIC_GRAPHQL_KEY;
-	const env = process.env.NODE_ENV;
-	const dev = env === "development" || env === "test";
+	const endpoint = process.env.FGU_API_ENDPOINT;
+	const dev = !!endpoint;
 	const devOptions: Omit<ClientConfig, "secret"> = dev ? {
 		domain: "localhost",
 		scheme: "http",
@@ -71,6 +74,7 @@ export const getStaticProps: GetStaticProps = async () => {
 			q.Distinct(q.Match(q.Index("all-stream-languages")))
 		)
 	)
+
 	const services: { data: string[] } = await client.query(
 		q.Paginate(
 			q.Distinct(q.Match(q.Index("all-stream-services")))
