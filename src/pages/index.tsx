@@ -25,8 +25,6 @@ export default function Home({ langs }: Props) {
 		onFilterChange
 	} = useStreams(streamsRef);
 
-	console.log(streams)
-
 	return (
 		<Layout>
 			<Head>

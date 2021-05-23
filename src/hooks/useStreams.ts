@@ -27,7 +27,6 @@ export function useStreams(streamsRef: RefObject<HTMLDivElement>){
 
 	useEffect(() => {
 		nextCursor.current = null;
-		console.log("Next cursor changed to", nextCursor.current)
 
 		setCursor(null);
 	}, [JSON.stringify(state)]);

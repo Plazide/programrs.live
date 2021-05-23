@@ -13,7 +13,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		fetchFromYoutube()
 	]);
 
-	console.log(streams);
 	await saveToFauna(streams.flat())
 
 	res.statusCode = 200
