@@ -11,7 +11,8 @@ export function filter(attr: string): Expr{
 			q.Var(attr), 
 			q.Select(
 				["data", attr], 
-				q.Var("stream")
+				q.Var("stream"),
+				null
 			)
 		)
 	)

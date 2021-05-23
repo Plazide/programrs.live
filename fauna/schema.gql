@@ -7,7 +7,7 @@ type Stream{
 	viewers: Int!
 	startedAt: Time!
 	link: String!
-	language: String!
+	language: String
 	avatar: String
 	tech: [String]
 }
