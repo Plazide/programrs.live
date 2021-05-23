@@ -42,11 +42,14 @@
 	background: var(--primary);
 	height: 25px;
 	border-radius: 4px;
-	padding: 2px 5px;
+	padding: 4px;
 	position: absolute;
 
 	top: 10px;
 	right: 10px;
+}
+.stream .service .icon{
+	height: 100%;
 }
 .stream .startedAt{
 	box-sizing: border-box;

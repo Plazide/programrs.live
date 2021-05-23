@@ -5,12 +5,15 @@ import { saveToFauna } from "../../util/api/fauna"
 
 // Types
 import { NormalizedStream } from "../../types/streams";
+import { fetchFromYoutube } from "../../util/api/youtube";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {	
 	const streams: NormalizedStream[][] = await Promise.all([
 		fetchFromTwitch(),
+		fetchFromYoutube()
 	]);
 
+	console.log(streams);
 	await saveToFauna(streams.flat())
 
 	res.statusCode = 200

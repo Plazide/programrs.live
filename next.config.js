@@ -8,6 +8,10 @@ module.exports = {
 		return config;
 	},
 	images: {
-		domains: ["static-cdn.jtvnw.net"]
+		domains: [
+			"static-cdn.jtvnw.net",
+			"i.ytimg.com",
+			"yt3.ggpht.com"
+		]
 	}
 }

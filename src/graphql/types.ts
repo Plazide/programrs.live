@@ -82,7 +82,7 @@ export type StreamInput = {
   viewers: Scalars['Int'];
   startedAt: Scalars['Time'];
   link: Scalars['String'];
-  language: Scalars['String'];
+  language?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   tech?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
@@ -149,7 +149,7 @@ export type Stream = {
   viewers: Scalars['Int'];
   service: EnumService;
   thumbnail: Scalars['String'];
-  language: Scalars['String'];
+  language?: Maybe<Scalars['String']>;
   link: Scalars['String'];
   startedAt: Scalars['Time'];
   tech?: Maybe<Array<Maybe<Scalars['String']>>>;

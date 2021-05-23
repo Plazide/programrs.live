@@ -6,6 +6,7 @@ import { useIsMobile } from "../../hooks/useIsMobile";
 // Icons
 import ViewersIcon from "../../icons/viewers.svg";
 import TwitchLogo from "../../icons/twitch.svg";
+import YouTubeLogo from "../../icons/youtube.svg"
 
 // Styles
 import styles from "./stream.module.css";
@@ -18,7 +19,7 @@ interface StreamProps{
 }
 
 export default function Stream({ stream }: StreamProps): ReactElement{
-	const { thumbnail, channel, viewers, avatar, link, startedAt, title } = stream;
+	const { thumbnail, channel, viewers, avatar, link, startedAt, title, service } = stream;
 	const uptime = formatDistanceStrict(new Date(startedAt), new Date());
 	const isMobile = useIsMobile();
 	const titleLength = isMobile ? 55 : 45;
@@ -45,7 +46,10 @@ export default function Stream({ stream }: StreamProps): ReactElement{
 					<span>{viewers}</span>
 				</span>
 				<span className={styles.service}>
-					<TwitchLogo className={styles.icon} />
+					<Service 
+						service={service} 
+						className={styles.icon} 
+					/>
 				</span>
 				<span className={styles.startedAt}>
 					{uptime}
@@ -91,4 +95,13 @@ export default function Stream({ stream }: StreamProps): ReactElement{
 			</div>
 		</li>
 	)
+}
+
+function Service({ service, className = "" }: { service: "twitch" | "youtube", className?: string }){
+	switch(service){
+	case "twitch":
+		return <TwitchLogo className={className} />
+	case "youtube":
+		return <YouTubeLogo className={className} />
+	}
 }
