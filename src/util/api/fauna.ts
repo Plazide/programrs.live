@@ -4,7 +4,7 @@ import { Client, query as q } from "faunadb";
 import { NormalizedStream } from "../../types/streams"
 
 const endpoint = process.env.FGU_API_ENDPOINT;
-const [scheme, domain, port] = endpoint.replace("//", "").split(":") as ["http" | "https", string, string]|| [];
+const [scheme, domain, port] = endpoint ? endpoint.replace("//", "").split(":") as ["http" | "https", string, string] : [];
 const devOptions = endpoint ? { scheme, domain, port: parseInt(port) } : {};
 
 const client = new Client({
