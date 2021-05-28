@@ -1,0 +1,11 @@
+on:
+  schedule:
+    - cron: "30 */1 * * *"
+
+jobs:
+  streams:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: "Update streams"
+        run: "curl -d {} https://programrs.live/api/streams"
