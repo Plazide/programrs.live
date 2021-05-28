@@ -9,7 +9,8 @@
     "test": "jest",
     "fauna": "fgu",
     "fauna-dev:start": "docker start faunadb",
-    "fauna-dev:stop": "docker stop faunadb"
+    "fauna-dev:stop": "docker stop faunadb",
+	"postbuild": "yarn fauna"
   },
   "dependencies": {
     "@graphql-codegen/typescript-urql": "^2.0.5",
