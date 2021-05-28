@@ -44,6 +44,7 @@ export function useFilter(){
 		const value = e.currentTarget.value;
 		dispatch({
 			filter: {
+				...filter,
 				language: value
 			}
 		})
