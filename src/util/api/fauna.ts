@@ -3,11 +3,13 @@ import { Client, query as q } from "faunadb";
 // Types
 import { NormalizedStream } from "../../types/streams"
 
+const endpoint = process.env.FGU_API_ENDPOINT;
+const [scheme, domain, port] = endpoint.replace("//", "").split(":") as ["http" | "https", string, string]|| [];
+const devOptions = endpoint ? { scheme, domain, port: parseInt(port) } : {};
+
 const client = new Client({
-	domain: "localhost",
 	secret: process.env.FGU_SECRET,
-	port: 8443,
-	scheme: "http"
+	...devOptions
 })
 
 export async function saveToFauna(streams: NormalizedStream[]){
