@@ -22,7 +22,8 @@ export function filterTech(tech: Expr, included: Expr){
 	return q.If(
 		q.Or(
 			q.Equals(tech, null),
-			q.Equals(included, null)
+			q.Equals(included, null),
+			q.Equals(included, [])
 		),
 		true,
 		q.Any(
