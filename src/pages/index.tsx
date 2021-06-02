@@ -31,7 +31,7 @@ export default function Home({ langs }: Props) {
 				<title>Programrs | Find live programming streams</title>
 				<meta name="description" content="Find programming live streams from around the internet. Everything collected in one place for you to browse." />
 				<script async src="https://arc.io/widget.min.js#KxCLWtWu"></script>
-				<link rel="icon" href="/favicon.ico" />
+				<link rel="icon" href="/logo.png" />
 				<link 
 					rel="preconnect" 
 					href={API_ENDPOINT} 
