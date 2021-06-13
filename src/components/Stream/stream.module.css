@@ -32,7 +32,7 @@
 }
 .stream .viewers .icon{
 	height: .7rem;
-	margin-right: 10px;
+	margin-right: 6px;
 }
 .stream .viewers .icon path{
 	fill: var(--secondary);
@@ -192,6 +192,9 @@
 	.stream .service{
 		right: 5px;
 		top: 5px;
+	}
+	.stream .service .icon{
+		height: 12px;
 	}
 	.stream .avatar{
 		width: 40px;
