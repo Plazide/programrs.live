@@ -85,7 +85,7 @@ function normalizeFromYoutube(streams: YoutubeStream[]): NormalizedStream[]{
 		service: "youtube",
 		viewers: parseViewers(stream.liveStreamingDetails.concurrentViewers),
 		thumbnail: stream.snippet.thumbnails.medium.url,
-		link: `https://youtube.com/${stream.channel.id}`,
+		link: `https://youtube.com/watch?v=${stream.id}`,
 		title: stream.snippet.title,
 		startedAt: stream.liveStreamingDetails.actualStartTime,
 		channel: stream.snippet.channelTitle,
