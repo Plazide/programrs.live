@@ -140,6 +140,15 @@
 	font-size: .9rem;
 }
 
+@media (prefers-color-scheme: dark) {
+	.stream{
+		background: var(--purple);
+	}
+	.stream .imageWrapper{
+		color: var(--secondary);
+	}
+}
+
 @media only screen and (max-width: 905px){
 	.stream{
 		margin: .5rem .3rem;

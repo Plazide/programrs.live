@@ -24,3 +24,11 @@
 	background-size: .8rem;
 	background-repeat: no-repeat;
 }
+
+@media (prefers-color-scheme: dark){
+	.select{
+		background-color: var(--purple);
+		background-image: url(/chevron-down-light.svg);
+		color: var(--alt);
+	}
+}

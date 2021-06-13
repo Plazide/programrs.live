@@ -82,3 +82,23 @@
 .suggestion:focus{
 	background: var(--primary);
 }
+
+@media (prefers-color-scheme: dark) {
+	.inputWrapper{
+		background: var(--purple);
+	}
+	.inputWrapper input{
+		background: inherit;
+		color: var(--alt);
+	}
+	.inputWrapper input::placeholder{
+		color: var(--alt);
+		opacity: .7;
+	}
+	.suggestions{
+		background: var(--purple);
+	}
+	.selectedTags .tag span.value{
+		color: var(--secondary);
+	}
+}

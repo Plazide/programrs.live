@@ -27,6 +27,12 @@
 	font-size: .8rem;
 }
 
+@media (prefers-color-scheme: dark) {
+	.filter label span{
+		color: var(--alt);
+	}
+}
+
 @media only screen and (max-width: 600px){
 	.filter{
 		position: fixed;
