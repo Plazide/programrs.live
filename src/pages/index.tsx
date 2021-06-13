@@ -21,7 +21,6 @@ export default function Home({ langs }: Props) {
 	const{
 		streams,
 		fetching,
-		cursor,
 		onFilterChange
 	} = useStreams(streamsRef);
 
@@ -49,9 +48,12 @@ export default function Home({ langs }: Props) {
 			<div className={styles.streams} ref={streamsRef}>
 				<ul className={styles.list}>
 					{
-						fetching && !cursor
+						streams.map( stream => <Stream stream={stream} key={stream.channel} />)
+					}
+					{
+						fetching
 							? new Array(4).fill("").map( (_, index) => <StreamSkeleton key={index} />)
-							: streams.map( stream => <Stream stream={stream} key={stream.channel} />)
+							: null
 					}
 				</ul>
 			</div>
