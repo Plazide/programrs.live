@@ -38,7 +38,7 @@ export default function Home({ langs }: Props) {
 			</Head>
 			<div className={styles.hero}>
 				<h1>Live programming streams</h1>
-				<p>Find programming streams from all around the internet, but mostly Twitch.</p>
+				<p>Programming live streams aggregated for easy browsing.</p>
 			</div>
 
 			<Filter 
