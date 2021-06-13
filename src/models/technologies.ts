@@ -1,6 +1,6 @@
 /* 
-	This file defines technologies that will be extracted from stream titles. 
-	Technologies that can be referred to using multiple names can be defined as an array where the first item will be displayed value in the filter section.
+	This file defines technologies that will be extracted from stream titles and then used to filter results. 
+	Technologies with several common names can be expressed as an array, where the first item is the primary name of the technology.
 */
 
 export default [
