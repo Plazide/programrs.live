@@ -27,12 +27,6 @@
 	font-size: .8rem;
 }
 
-@media (prefers-color-scheme: dark) {
-	.filter label span{
-		color: var(--alt);
-	}
-}
-
 @media only screen and (max-width: 600px){
 	.filter{
 		position: fixed;
@@ -70,4 +64,27 @@
 		margin-right: 5px;
 	}
 	
+}
+
+@media (prefers-color-scheme: dark) {
+	.filter{
+		background: var(--purple);
+	}
+	.filter label span{
+		color: var(--alt);
+	}
+	.filter .button{
+		background: var(--secondary);
+		color: var(--alt);
+	}
+	.filter .icon{
+		fill: var(--alt);
+	}
+	.filter .options{
+		background: var(--secondary);
+		padding: .5rem;
+		margin-bottom: 1rem;
+		margin-top: 1rem;
+		border-radius: 4px;
+	}
 }
