@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode } from "react"
 import Logo from "../../images/logo.svg";
+import site from "../../models/site.config";
 
 import styles from "./layout.module.css";
 
@@ -12,9 +13,25 @@ export default function Layout({ children }: Props): ReactElement {
 		<>
 			<header className={styles.header}>
 				<div className={styles.content}>
-					<Logo className={styles.logo} />
-					<span className={styles.title}>Programrs</span>
+					<div className={styles.logo}>
+						<Logo className={styles.icon} />
+						<span className={styles.title}>Programrs</span>
+					</div>
+					
+
+					<div className={styles.links}>
+						<a
+							href={site.github}
+						>
+							<img 
+								src="/github-light.png"
+								className={styles.icon} 
+							/>
+						</a>
+					</div>
+				
 				</div>
+				
 			</header>
 			<main className={styles.main}>{children}</main>
 		</>
