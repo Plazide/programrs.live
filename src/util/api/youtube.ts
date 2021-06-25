@@ -1,5 +1,6 @@
 import { youtube, youtube_v3 } from "googleapis/build/src/apis/youtube";
 import tech from "../../models/technologies";
+import includelist from "../../models/includelist";
 
 // Types
 import { NormalizedStream } from "../../types/streams"
@@ -33,12 +34,24 @@ export async function fetchFromYoutube(){
 		pageToken = undefined;
 
 	async function _fetch(){
-		const searchResult = await service.search.list({
-			auth: API_KEY,
-			...searchOptions,
-			pageToken
-		})
-		const searchItems = searchResult.data.items;
+		const[searchResult, ...includeResults] = await Promise.all([
+			service.search.list({
+				auth: API_KEY,
+				...searchOptions,
+				pageToken
+			}),
+			...includelist.youtube.map( id => service.search.list({
+				auth: API_KEY,
+				...searchOptions,
+				q: "",
+				topicId: undefined,
+				channelId: id
+			}))
+		]);
+		const searchItems = [
+			...searchResult.data.items, 
+			...includeResults.filter( item => item.data.items.length > 0).map( item => item.data.items[0])
+		];
 		if(!searchItems || searchItems.length === 0) return;
 
 		const [videosResult, usersResult] = await Promise.all([

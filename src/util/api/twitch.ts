@@ -1,6 +1,7 @@
 import TwitchApi from "node-twitch";
 import { Stream as TwitchStream, User as TwitchUser } from "node-twitch/dist/types/objects";
 import { extractTechnology } from "../../util/tech";
+import includelist from "../../models/includelist";
 
 // Types
 import { NormalizedStream } from "../../types/streams"
@@ -22,20 +23,28 @@ export async function fetchFromTwitch(){
 	let streams = [];
 
 	async function _fetch(cursor = null){
-		const result = await twitch.getStreams({ 
-			game_id: [509670, 21548, 505867], 
-			language: "en", 
-			first: 100,
-			after: cursor
-		});
+		const [result, includeResults] = await Promise.all([
+			twitch.getStreams({ 
+				game_id: [509670, 21548, 505867], 
+				language: "en", 
+				first: 100,
+				after: cursor
+			}),
+			twitch.getStreams({
+				channels: includelist.twitch
+			})
+		]);
 		const newCursor = result.pagination.cursor;
 
-		const fetchedStreams = result.data
-			.filter( 
-				stream => stream.tag_ids?.some( 
-					tagId => tags.includes(tagId) 
-				)
-			);
+		const fetchedStreams = [
+			...result.data
+				.filter( 
+					stream => stream.tag_ids?.some( 
+						tagId => tags.includes(tagId) 
+					)
+				),
+			...includeResults.data
+		]
 		const newChannels = fetchedStreams.map( stream => stream.user_id);
 		const newUsers = await twitch.getUsers(newChannels);
 		const newStreams = fetchedStreams.map( stream => ({
