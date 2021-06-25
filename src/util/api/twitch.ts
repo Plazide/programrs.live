@@ -23,17 +23,18 @@ export async function fetchFromTwitch(){
 	let streams = [];
 
 	async function _fetch(cursor = null){
-		const [result, includeResults] = await Promise.all([
+		const [result, includeResults] = (await Promise.all([
 			twitch.getStreams({ 
 				game_id: [509670, 21548, 505867], 
 				language: "en", 
 				first: 100,
 				after: cursor
 			}),
-			twitch.getStreams({
-				channels: includelist.twitch
-			})
-		]);
+			includelist.twitch.length > 0 ? twitch.getStreams({
+				channels: includelist.twitch,
+				first: includelist.youtube.length
+			}) : { data: [] }
+		]))
 		const newCursor = result.pagination.cursor;
 
 		const fetchedStreams = [
@@ -44,7 +45,7 @@ export async function fetchFromTwitch(){
 					)
 				),
 			...includeResults.data
-		]
+		].filter(Boolean);
 		const newChannels = fetchedStreams.map( stream => stream.user_id);
 		const newUsers = await twitch.getUsers(newChannels);
 		const newStreams = fetchedStreams.map( stream => ({
