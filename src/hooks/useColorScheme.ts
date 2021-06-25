@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
-export function useColorScheme(): "dark" | "light" {
+type Scheme = "dark" | "light";
+
+export function useColorScheme(): Scheme {
 	const defaultScheme = window?.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-	const [scheme, setScheme] = useState(defaultScheme);
+	const [scheme, setScheme] = useState<Scheme>(defaultScheme);
 
 	useEffect( () => {
 		window?.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
