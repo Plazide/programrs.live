@@ -28,7 +28,7 @@ git clone https://github.com/Plazide/programrs.live
 Install dependencies:
 ```bash
 yarn install
-// or
+# or
 npm install
 ```
 
