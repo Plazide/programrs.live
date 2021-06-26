@@ -69,6 +69,7 @@
 @media (prefers-color-scheme: dark) {
 	.filter{
 		background: var(--purple);
+		padding: .4rem 1.2rem;
 	}
 	.filter label span{
 		color: var(--alt);
