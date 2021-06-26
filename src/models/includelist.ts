@@ -6,7 +6,13 @@ export default {
 		"UCeU-1X402kT-JlLdAitxSMA",
 
 		// The Coding Train
-		"UCvjgXvBlbQiydffZU7m1_aw"
+		"UCvjgXvBlbQiydffZU7m1_aw",
+
+		// Adam Wathan
+		"UCy1H38XrN7hi7wHSClfXPqQ",
+
+		// Traversy Media
+		"UC29ju8bIPH5as8OGnQzwJyA"
 	],
 	twitch: [
 		// Empty.
