@@ -7,8 +7,11 @@
 export default {
 	words: [
 		// Add blocked words here...
+		"Earthquake",
+		"Hurricane"
 	],
 	channels: [
+		// Add blocked channels here
 		"LabPadre",
 		"cnbc awaaz",
 		"pearl tv",
@@ -21,6 +24,25 @@ export default {
 		"Peter Galbavy",
 		"Elena Sagehashi",
 		"RAKwireless",
-		"glidzmodernbasic-グライズウェットスーツ"
+		"glidzmodernbasic-グライズウェットスーツ",
+		"LIVE NOW",
+		"GFS Ventures - The Hidden Gem",
+		"Документальные проекты. РЕН ТВ",
+		"Power Experiment - Asmr",
+		"KingFrostmare",
+		"Space Videos",
+		"地震速報24h",
+		"朝日新聞宇宙部",
+		"Touch Your Heart",
+		"Force Thirteen : Earthquakes",
+		"Force Thirteen AU",
+		"Spectro Net",
+		"Lossy Lossnitzer",
+		"Trégor Sonore",
+		"Научная Станция",
+		"World Today",
+		"Tech Samachar Kannada",
+		"CantonRefinery",
+		"Stream RaspberryPi"
 	]
 }
