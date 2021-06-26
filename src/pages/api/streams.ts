@@ -15,9 +15,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	]);
 
 	const flattened = raw.flat();
-	console.log(flattened.length);
 	const streams = filterBlocked(flattened, blocked);
-	console.log(streams.length);
+	
 	await saveToFauna(streams)
 
 	res.statusCode = 200
