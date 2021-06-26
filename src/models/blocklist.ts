@@ -14,6 +14,13 @@ export default {
 		"pearl tv",
 		"piangper man",
 		"pixcams",
-		"chryston parish church"
+		"chryston parish church",
+		"VirtualAssistant",
+		"clawarcade",
+		"vector_the_robot",
+		"Peter Galbavy",
+		"Elena Sagehashi",
+		"RAKwireless",
+		"glidzmodernbasic-グライズウェットスーツ"
 	]
 }
