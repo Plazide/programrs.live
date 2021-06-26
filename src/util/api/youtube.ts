@@ -23,10 +23,10 @@ const query = tech
 const searchOptions: youtube_v3.Params$Resource$Search$List = {
 	part: ["snippet"],
 	eventType: "live",
-	q: query,
+	q: `+(${query})`,
 	type: ["video"],
 	maxResults: 50,
-	topicId: "/m/07c1v"
+	videoCategoryId: "28"
 }
 
 export async function fetchFromYoutube(){
@@ -42,9 +42,9 @@ export async function fetchFromYoutube(){
 			}),
 			...includelist.youtube.map( id => service.search.list({
 				auth: API_KEY,
-				...searchOptions,
-				q: "",
-				topicId: undefined,
+				part: ["snippet"],
+				eventType: "live",
+				type: ["video"],
 				channelId: id
 			}))
 		]);
