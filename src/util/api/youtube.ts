@@ -26,7 +26,8 @@ const searchOptions: youtube_v3.Params$Resource$Search$List = {
 	q: `+(${query})`,
 	type: ["video"],
 	maxResults: 50,
-	videoCategoryId: "28"
+	videoCategoryId: "28",
+	topicId: "/m/07c1v"
 }
 
 export async function fetchFromYoutube(){
@@ -83,7 +84,15 @@ export async function fetchFromYoutube(){
 	
 	await _fetch();
 
-	return normalizeFromYoutube(streams.flat());
+	const normalizedStreams = normalizeFromYoutube(streams.flat())
+		.filter( stream => {
+			const uptime = Date.now() - new Date(stream.startedAt).getTime();
+			const hours = uptime / 1000 / 60 / 60;
+
+			// Use arbitrary number of hours to determine if stream is something other than a programming stream.
+			return hours < 32;
+		});
+	return normalizedStreams;
 }
 
 function parseViewers(viewers: string){
