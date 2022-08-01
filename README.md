@@ -60,6 +60,8 @@ in .fauna.json
 
 ```shell
 docker start faunadb
+```
+
 ```json
 
 
