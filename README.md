@@ -43,6 +43,7 @@ You could also create a local node, which I recommend that you do. This app cons
 ```bash
 npm i -g fauna-shell
 docker pull fauna/faunadb:latest
+docker run --name faunadb -p 8443:8443 -p 8084:8084 -v /var/lib/faunadb fauna/faunadb
 fauna add-endpoint http://localhost:8443 --alias localhost --key secret
 fauna create-database fauna-dev --endpoint=localhost
 fauna create-key fauna-dev --endpoint=localhost
