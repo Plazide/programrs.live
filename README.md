@@ -62,8 +62,6 @@ in .fauna.json
 docker start faunadb
 ```
 
-```json
-
 
 #### Environment variables
 You need to create a file called `.env.local`.
