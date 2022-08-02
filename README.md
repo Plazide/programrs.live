@@ -37,7 +37,32 @@ You need to create a Fauna database. You can easily do this by going to the [Fau
 
 This project uses [Fauna GQL Upload](https://github.com/Plazide/fauna-gql-upload). This means that we can create and update all of our database resources by running `yarn fauna` or `npm run fauna`. All you need is and admin secret for your database called `FGU_SECRET` in `.env.local`.
 
+#### FaunaDB local
+
 You could also create a local node, which I recommend that you do. This app consumes a lot of read and write operations, which might incur costs when using a cloud hosted instance of FaunaDB. See [Set up Fauna GQL Upload with Fauna Dev](https://blog.chjweb.se/set-up-fauna-gql-upload-with-fauna-dev) to learn how to run a local Fauna database.
+```bash
+npm i -g fauna-shell
+docker pull fauna/faunadb:latest
+docker run --name faunadb -p 8443:8443 -p 8084:8084 -v /var/lib/faunadb fauna/faunadb
+fauna add-endpoint http://localhost:8443 --alias localhost --key secret
+fauna create-database fauna-dev --endpoint=localhost
+fauna create-key fauna-dev --endpoint=localhost
+```
+in .env.local
+```shell
+FGU_SECRET=[secret from the previous step]
+NEXT_PUBLIC_GRAPHQL_KEY=secret
+```
+
+in .fauna.json
+```json
+"region": "local"
+```
+
+```shell
+docker start faunadb
+```
+
 
 #### Environment variables
 You need to create a file called `.env.local`.
