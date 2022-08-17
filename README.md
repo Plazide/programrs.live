@@ -51,7 +51,7 @@ fauna create-key fauna-dev --endpoint=localhost
 in .env.local
 ```shell
 FGU_SECRET=[secret from the previous step]
-NEXT_PUBLIC_GRAPHQL_KEY=secret
+NEXT_PUBLIC_GRAPHQL_KEY=[same secret as above]
 ```
 
 in .fauna.json
